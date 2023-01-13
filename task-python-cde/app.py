@@ -44,9 +44,11 @@ def fetchBatch():
     
     cur.copy_expert("COPY target_table FROM stdin DELIMITER \',\' CSV header;", f)
     cur.execute("commit;")
+    cur.execute("select * from target_table")
     print("Loaded data into {}".format("target_table"))
+    val = cur.fetchall()
     conn.close()
     print("DB connection closed.")
-    return 'File loaded into RDS: ' + str(download_path)
+    return 'File loaded into RDS: \n' + str(download_path)+"\n"+str(val)
 
      
