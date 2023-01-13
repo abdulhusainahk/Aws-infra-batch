@@ -1,0 +1,23 @@
+[
+  {
+    "name": "${app}-${env}",
+    "image": "${app_image}",
+    "cpu": 512,
+    "memory": 1024,
+    "networkMode": "awsvpc",
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "batchloggroup",
+          "awslogs-region": "${aws_region}",
+          "awslogs-stream-prefix": "ecs"
+        }
+    },
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ]
+  }
+]
